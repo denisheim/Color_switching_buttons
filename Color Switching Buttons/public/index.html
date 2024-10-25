@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entity Control</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            background-color: #f4f4f9;
+        }
+        h1 {
+            text-align: center;
+            font-size: 2em;
+            color: #333;
+        }
+        #entities {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* 4 columns */
+            gap: 15px; /* Space between buttons */
+            margin-top: 20px;
+        }
+        .entity-button {
+            padding: 15px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 10px; /* Rounded corners */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Button shadow */
+            transition: all 0.3s ease; /* Smooth transition */
+            color: white;
+        }
+        .entity-button.on {
+            background-color: #28a745; /* Green when ON */
+        }
+        .entity-button.off {
+            background-color: #dc3545; /* Red when OFF */
+        }
+        .entity-button:hover {
+            transform: translateY(-3px); /* Hover effect to lift button */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
+        }
+        .entity-button.on:hover {
+            background-color: #218838; /* Darker green on hover */
+        }
+        .entity-button.off:hover {
+            background-color: #c82333; /* Darker red on hover */
+        }
+    </style>
+</head>
+<body>
+    <h1>Toggle Entity States</h1>
+
+    <div id="entities"></div>
+
+    <script>
+        const ws = new WebSocket('ws://tlacitka.thastertyn.xyz');
+        const entitiesDiv = document.getElementById('entities');
+
+        ws.onopen = () => {
+            console.log('Connected to the WebSocket server');
+        };
+
+        ws.onmessage = (event) => {
+            const data = JSON.parse(event.data);
+            if (data.type === 'initialData') {
+                renderEntities(data.data);
+            } else if (data.type === 'updateData') {
+                renderEntities(data.data);
+            }
+        };
+
+        // Render entities as toggleable buttons
+        function renderEntities(entities) {
+            entitiesDiv.innerHTML = ''; // Clear previous buttons
+            entities.forEach(entity => {
+                const button = document.createElement('button');
+                button.className = 'entity-button ' + (entity.state ? 'on' : 'off');
+                button.textContent = `${entity.name} (${entity.id}) - ${entity.state ? 'On' : 'Off'}`;
+                
+                button.onclick = () => {
+                    const newState = !entity.state; // Toggle state
+                    ws.send(JSON.stringify({ type: 'changeState', id: entity.id, state: newState }));
+                };
+
+                entitiesDiv.appendChild(button);
+            });
+        }
+    </script>
+</body>
+</html>

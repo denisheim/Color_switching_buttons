@@ -1,0 +1,82 @@
+[
+  {
+    "id": "1",
+    "name": "U masice doma",
+    "state": true
+  },
+  {
+    "id": "2",
+    "name": "Setickuv obyvak",
+    "state": true
+  },
+  {
+    "id": "3",
+    "name": "Sklep s detma",
+    "state": false
+  },
+  {
+    "id": "4",
+    "name": "Kuchyne",
+    "state": true
+  },
+  {
+    "id": "5",
+    "name": "Ondra Faltin",
+    "state": false
+  },
+  {
+    "id": "6",
+    "name": "Hala",
+    "state": false
+  },
+  {
+    "id": "7",
+    "name": "Koupelna",
+    "state": false
+  },
+  {
+    "id": "8",
+    "name": "LoÅ¾nice",
+    "state": true
+  },
+  {
+    "id": "9",
+    "name": "Garaz",
+    "state": true
+  },
+  {
+    "id": "10",
+    "name": "Zahrada",
+    "state": false
+  },
+  {
+    "id": "11",
+    "name": "Obyvak",
+    "state": true
+  },
+  {
+    "id": "12",
+    "name": "Jidelna",
+    "state": true
+  },
+  {
+    "id": "13",
+    "name": "Sklep",
+    "state": false
+  },
+  {
+    "id": "14",
+    "name": "Chodba",
+    "state": true
+  },
+  {
+    "id": "15",
+    "name": "Kancelar",
+    "state": true
+  },
+  {
+    "id": "16",
+    "name": "Studovna",
+    "state": false
+  }
+]
